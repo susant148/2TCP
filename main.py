@@ -9,7 +9,7 @@ from Pb2 import DEcwHisPErMsG_pb2 , MajoRLoGinrEs_pb2 , PorTs_pb2 , MajoRLoGinrE
 from cfonts import render, say
 import asyncio
 import signal
-import sys
+import n
 
 import random
 from Crypto.Cipher import AES
@@ -232,7 +232,7 @@ class MultiAccountManager:
             
 async def SEnd_InV_with_Cosmetics(Nu, Uid, K, V, region):
     """Simple version - just add field 5 with basic cosmetics"""
-    region = "ind"
+    region = "bd"
     fields = {
         1: 2, 
         2: {
@@ -248,7 +248,7 @@ async def SEnd_InV_with_Cosmetics(Nu, Uid, K, V, region):
         }
     }
 
-    if region.lower() == "ind":
+    if region.lower() == "bd":
         packet = '0514'
     elif region.lower() == "bd":
         packet = "0519"
@@ -280,7 +280,7 @@ async def join_custom_room(room_id, room_password, key, iv, region):
         }
     }
     
-    if region.lower() == "ind":
+    if region.lower() == "bd":
         packet_type = '0514'
     elif region.lower() == "bd":
         packet_type = "0519"
@@ -300,7 +300,7 @@ async def leave_squad(key, iv, region):
     
     packet = (await CrEaTe_ProTo(fields)).hex()
     
-    if region.lower() == "ind":
+    if region.lower() == "bd":
         packet_type = '0514'
     elif region.lower() == "bd":
         packet_type = "0519"
@@ -360,7 +360,7 @@ async def request_join_with_badge(target_uid, badge_value, key, iv, region):
     
     packet = (await CrEaTe_ProTo(fields)).hex()
     
-    if region.lower() == "ind":
+    if region.lower() == "bd":
         packet_type = '0514'
     elif region.lower() == "bd":
         packet_type = "0519"
@@ -405,7 +405,7 @@ async def create_custom_room(room_name, room_password, max_players, key, iv, reg
         }
     }
     
-    if region.lower() == "ind":
+    if region.lower() == "bd":
         packet_type = '0514'
     elif region.lower() == "bd":
         packet_type = "0519"
@@ -460,7 +460,7 @@ async def real_multi_account_join(target_uid, key, iv, region):
 
 
 async def handle_badge_command(cmd, inPuTMsG, uid, chat_id, key, iv, region, chat_type):
-    """Handle individual badge commands"""
+    """Handle bdividual badge commands"""
     parts = inPuTMsG.strip().split()
     if len(parts) < 2:
         error_msg = f"[B][C][FF0000]❌ Usage: /{cmd} (uid)\nExample: /{cmd} 123456789\n"
@@ -566,7 +566,7 @@ async def create_authenticated_join(target_uid, account_uid, key, iv, region):
             
             packet = (await CrEaTe_ProTo(fields)).hex()
             
-            if region.lower() == "ind":
+            if region.lower() == "bd":
                 packet_type = '0514'
             elif region.lower() == "bd":
                 packet_type = "0519"
@@ -1416,8 +1416,8 @@ async def MajorLogin(payload):
             if response.status == 200: return await response.read()
             return None
 
-async def GetLoginData(base_url, payload, token):
-    url = f"{base_url}/GetLoginData"
+async def GetLogbdata(base_url, payload, token):
+    url = f"{base_url}/GetLogbdata"
     ssl_context = ssl.create_default_context()
     ssl_context.check_hostname = False
     ssl_context.verify_mode = ssl.CERT_NONE
@@ -1432,9 +1432,9 @@ async def DecRypTMajoRLoGin(MajoRLoGinResPonsE):
     proto.ParseFromString(MajoRLoGinResPonsE)
     return proto
 
-async def DecRypTLoGinDaTa(LoGinDaTa):
-    proto = PorTs_pb2.GetLoginData()
-    proto.ParseFromString(LoGinDaTa)
+async def DecRypTLoGbdaTa(LoGbdaTa):
+    proto = PorTs_pb2.GetLogbdata()
+    proto.ParseFromString(LoGbdaTa)
     return proto
 
 async def DecodeWhisperMessage(hex_packet):
@@ -1712,7 +1712,7 @@ async def TcPOnLine(ip, port, key, iv, AutHToKen, reconnect_delay=0.5):
                     
 
                             
-async def TcPChaT(ip, port, AutHToKen, key, iv, LoGinDaTaUncRypTinG, ready_event, region , reconnect_delay=0.5):
+async def TcPChaT(ip, port, AutHToKen, key, iv, LoGbdaTaUncRypTinG, ready_event, region , reconnect_delay=0.5):
     print(region, 'TCP CHAT')
 
     global spam_room , whisper_writer , spammer_uid , spam_chat_id , spam_uid , online_writer , chat_id , XX , uid , Spy,data2, Chat_Leave, fast_spam_running, fast_spam_task, custom_spam_running, custom_spam_task, spam_request_running, spam_request_task, evo_fast_spam_running, evo_fast_spam_task, evo_custom_spam_running, evo_custom_spam_task, lag_running, lag_task, evo_cycle_running, evo_cycle_task, reject_spam_running, reject_spam_task
@@ -1724,9 +1724,9 @@ async def TcPChaT(ip, port, AutHToKen, key, iv, LoGinDaTaUncRypTinG, ready_event
             whisper_writer.write(bytes_payload)
             await whisper_writer.drain()
             ready_event.set()
-            if LoGinDaTaUncRypTinG.Clan_ID:
-                clan_id = LoGinDaTaUncRypTinG.Clan_ID
-                clan_compiled_data = LoGinDaTaUncRypTinG.Clan_Compiled_Data
+            if LoGbdaTaUncRypTinG.Clan_ID:
+                clan_id = LoGbdaTaUncRypTinG.Clan_ID
+                clan_compiled_data = LoGbdaTaUncRypTinG.Clan_Compiled_Data
                 print('\n - TarGeT BoT in CLan ! ')
                 print(f' - Clan Uid > {clan_id}')
                 print(f' - BoT ConnEcTed WiTh CLan ChaT SuccEssFuLy ! ')
@@ -1955,7 +1955,7 @@ async def TcPChaT(ip, port, AutHToKen, key, iv, LoGinDaTaUncRypTinG, ready_event
         
                                 try:
                                     # Get bot UID
-                                    bot_uid = LoGinDaTaUncRypTinG.AccountUID if hasattr(LoGinDaTaUncRypTinG, 'AccountUID') else 13601801571
+                                    bot_uid = LoGbdaTaUncRypTinG.AccountUID if hasattr(LoGbdaTaUncRypTinG, 'AccountUID') else 13601801571
             
                                     # Send room chat using leaked packet structure
                                     room_chat_packet = await send_room_chat_enhanced(message, room_id, key, iv, region)
@@ -2212,7 +2212,7 @@ Modified by - BLACK_Apis
                                     print(f"Room spam error: {e}")          
                                     
                                     
-                        # Individual command handlers for /s1 to /s8
+                        # bdividual command handlers for /s1 to /s8
                         if inPuTMsG.strip().startswith('/s1'):
                             await handle_badge_command('s1', inPuTMsG, uid, chat_id, key, iv, region, response.Data.chat_type)
     
@@ -2330,7 +2330,7 @@ Modified by - BLACK_Apis
                                     # If regular join fails, try ghost join
                                     try:
                                         # Get bot's UID from global context or login data
-                                        bot_uid = LoGinDaTaUncRypTinG.AccountUID if hasattr(LoGinDaTaUncRypTinG, 'AccountUID') else TarGeT
+                                        bot_uid = LoGbdaTaUncRypTinG.AccountUID if hasattr(LoGbdaTaUncRypTinG, 'AccountUID') else TarGeT
                 
                                         ghost_packet = await ghost_join_packet(bot_uid, CodE, key, iv)
                                         if ghost_packet:
@@ -2370,7 +2370,7 @@ Modified by - BLACK_Apis
                                 
                                 try:
                                     # Get bot's UID from global context or login data
-                                    bot_uid = LoGinDaTaUncRypTinG.AccountUID if hasattr(LoGinDaTaUncRypTinG, 'AccountUID') else TarGeT
+                                    bot_uid = LoGbdaTaUncRypTinG.AccountUID if hasattr(LoGbdaTaUncRypTinG, 'AccountUID') else TarGeT
                                     
                                     ghost_packet = await ghost_join_packet(bot_uid, CodE, key, iv)
                                     if ghost_packet:
@@ -3018,7 +3018,7 @@ async def MaiiiinE():
     
     MajoRLoGinauTh = await DecRypTMajoRLoGin(MajoRLoGinResPonsE)
     UrL = MajoRLoGinauTh.url
-    # In the MaiiiinE function, find and comment out these print statements:
+    # In the MaiiiinE function, fbd and comment out these print statements:
     os.system('clear')
     print("🔄 Starting TCP Connections...")
     print("📡 Connecting to Free Fire servers...")
@@ -3033,21 +3033,21 @@ async def MaiiiinE():
     iv = MajoRLoGinauTh.iv
     timestamp = MajoRLoGinauTh.timestamp
     
-    LoGinDaTa = await GetLoginData(UrL , PyL , ToKen)
-    if not LoGinDaTa: print("ErroR - GeTinG PorTs From LoGin DaTa !") ; return None
-    LoGinDaTaUncRypTinG = await DecRypTLoGinDaTa(LoGinDaTa)
-    OnLinePorTs = LoGinDaTaUncRypTinG.Online_IP_Port
-    ChaTPorTs = LoGinDaTaUncRypTinG.AccountIP_Port
+    LoGbdaTa = await GetLogbdata(UrL , PyL , ToKen)
+    if not LoGbdaTa: print("ErroR - GeTinG PorTs From LoGin DaTa !") ; return None
+    LoGbdaTaUncRypTinG = await DecRypTLoGbdaTa(LoGbdaTa)
+    OnLinePorTs = LoGbdaTaUncRypTinG.Online_IP_Port
+    ChaTPorTs = LoGbdaTaUncRypTinG.AccountIP_Port
     OnLineiP , OnLineporT = OnLinePorTs.split(":")
     ChaTiP , ChaTporT = ChaTPorTs.split(":")
-    acc_name = LoGinDaTaUncRypTinG.AccountName
+    acc_name = LoGbdaTaUncRypTinG.AccountName
     #print(acc_name)
     
     equie_emote(ToKen,UrL)
     AutHToKen = await xAuThSTarTuP(int(TarGeT) , ToKen , int(timestamp) , key , iv)
     ready_event = asyncio.Event()
     
-    task1 = asyncio.create_task(TcPChaT(ChaTiP, ChaTporT , AutHToKen , key , iv , LoGinDaTaUncRypTinG , ready_event ,region))
+    task1 = asyncio.create_task(TcPChaT(ChaTiP, ChaTporT , AutHToKen , key , iv , LoGbdaTaUncRypTinG , ready_event ,region))
     task2 = asyncio.create_task(TcPOnLine(OnLineiP , OnLineporT , key , iv , AutHToKen))  
 
     os.system('clear')
